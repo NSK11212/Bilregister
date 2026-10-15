@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 /* 
 Skapa en set av instruktioner:
