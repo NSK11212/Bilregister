@@ -38,7 +38,11 @@ typedef enum {
     INPUT_END_OF_FILE
 } InputStatus;
 
+static const char *const RANDOM_BRANDS[] = {" Audi", "BMW", "Ford", "Honda", "Kia", "Peugeot", "Renault", "Saab", "Tesla", "Toyota", "Volkswagen", "Volvo"};
 static const char *const RANDOM_TYPES[] = {"SUV", "Sedan", "Kupe", "Van", "Minivan", "Pickup", "Convertible", "Crossover"};
+static const char *const RANDOM_FIRST_NAME = {"Anna", "Adam", "Ellinor", "Elliot", "Christina", "Christer", "Lars", "Lena", "Maria", "Marcus", "Roger", "Rebecca", "Sara", "Simon"};
+static const char *const RANDOM_LAST_NAME = {"Andersson", "Lindberg", "Lundberg", "Holm", "Olsson", "Ali", "Lindqvist", "Sandberg", "Forsberg", "Berglund", "Eklund"};
+
 
 /* 
 Skapa en set av instruktioner:
