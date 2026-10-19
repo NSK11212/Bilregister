@@ -50,6 +50,33 @@ static const char *const RANDOM_LAST_NAME = {"Andersson", "Lindberg", "Lundberg"
 
 static const char PLATE_ALPHABET[] ="ABCDEFGHJKLMNOPRSTUWXYZ";
 
+// safe input för lång sträng och newlines
+static InputStatus read_line(char *buf, size_t size) {
+    size_t len;
+    int c;
+
+    if (fgets(buf, (int)size, stdin) == NULL) return INPUT_END_OF_FILE;
+    len = strlen(buf);
+    if (len > 0 && buf[len - 1] == '\n') { buf[len - 1] = '\0'; return INPUT_OK; }
+    if (feof(stdin)) return INPUT_OK;
+    while ((c = getchar()) != '\n' && c != EOF) {}
+    return INPUT_OGILTIGT;
+}
+
+static int read_text(const char *prompt, char *buf, size_t size) {
+    for (;;) {
+        InputStatus status;
+        print("%s", prompt);
+        status = read_line(buf, size);
+        if (status == INPUT_END_OF_FILE) return 0;
+        if (status == INPUT_OGILTIGT) printf("Texten är för lång (max %d karaktärer). \n", (int)size -1);
+        else if (buf[0] == '\0') printf("Text/Karaktär få inte vara tom. \n");
+        else return 1;
+    }
+}
+
+// Behöver samma funktion som  read_line men för int så read_int
+
 /* MAIN PROGRAM */
 static void print_menu(void) {
     printf("\n1. Add Vehicle\n");
@@ -100,6 +127,7 @@ int main(void) {
     int running = 1;
 
     while (running) {
+        InputStatus status;
         print_menu();
         if (//input invalid sluta programmet) break;
         switch (choice) {
