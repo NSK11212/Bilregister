@@ -50,7 +50,13 @@ static void print_menu(void) {
 }
 
 static void add_vehicle() {
-
+/* Lägg till bill
+fråga efter namn, 
+            ålder, 
+            bilmärke, 
+            fordontyp, 
+            regnummer.
+*/    
 }
 
 static void remove_vehicle() {
@@ -78,14 +84,14 @@ static void print_vehicle () {
 }
 
 static void quit_program() {
-    
+// Spara och avsluta programmet
 }
 
 int main(void) {
     int choice;
 
     switch (choice) {
-        case MENU_ADD: add_vechile; break;
-        case MENU_QUIT: quit_program; break; 
+        case MENU_ADD: add_vechile(); break;
+        case MENU_QUIT: quit_program(); break; 
     }
 }
