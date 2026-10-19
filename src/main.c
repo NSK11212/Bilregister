@@ -1,5 +1,18 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
+#include <time.h>
+
+typedef enum {
+    MENU_QUIT,
+    MENU_ADD,
+    MENU_REMOVE,
+    MENU_SORT,
+    MENU_SHOW,
+    MENU_SHOW_ALL,
+    MENU_RANDOM,
+    MENU_LAST = MENU_RANDOM
+} MenuChoice;
 
 /* 
 Skapa en set av instruktioner:
@@ -26,11 +39,50 @@ slumpa fordon. Ett slumpad fordon ska skapas, med rimliga värden. För varje eg
 fordon ska det finnas minst 10 möjliga slumvärden.
 */
 
+static void print_menu(void) {
+    printf("\n1. Add Vehicle\n");
+    printf("2. Remove Vehicle\n");
+    printf("3. Sort\n");
+    printf("4. Show Vehicle\n");
+    printf("5. Show Registry\n");
+    printf("6. Random Vehicle\n");
+    printf("0. Quit\n");
+}
+
+static void add_vehicle() {
+
+}
+
+static void remove_vehicle() {
+// Från 1-10 position "Tänk på att vektorer börjar på 0"
+}
+
+static void random_vehicle () {
+// Slumpgenration För Funktioner 6 i labb listan
+}
+
+static void show_vehicle () {
+
+}
+
+static void show_registry_vehicle () {
+// Skriver ut hela listan "Endast ett fordon per rad"
+}
+
+static void sort_vehicle () {
+// Soteras i BOKSTAVS ordining efter BILMÄRKE
+}
+
+static void print_vehicle () {
+// Från 1-10 position "Tänk på att vektorer börjar på 0"
+}
+
 int main() {
+    int choice;
+    int running = 1;
 
-    int a;
-    scanf("%d", &a);
-    printf("%d\n", a);
-    return 0;
-
+    switch (choice) {
+        case MENU_ADD: add_vechile; break;
+        case MENU_QUIT: running = 0; break; 
+    }
 }
