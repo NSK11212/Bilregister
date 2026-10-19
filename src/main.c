@@ -83,15 +83,12 @@ static void print_vehicle () {
 // Från 1-10 position "Tänk på att vektorer börjar på 0"
 }
 
-static void quit_program() {
-// Spara och avsluta programmet
-}
-
 int main(void) {
     int choice;
+    int running = 1;
 
     switch (choice) {
         case MENU_ADD: add_vechile(); break;
-        case MENU_QUIT: quit_program(); break; 
+        case MENU_QUIT: running = 0; break; 
     }
 }
