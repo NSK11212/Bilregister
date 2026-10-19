@@ -3,6 +3,16 @@
 #include <string.h>
 #include <time.h>
 
+#define MIN_AGE 18
+#define MAX_AGE 100
+#define RANDOM_MIN_AGE 18
+#define RANDOM_MAX_AGE 90
+#define PLATE_LETTERS 3
+#define PLATE_DIGITS 3
+#define DIGIT_BASE 10
+#define LINE_LEN 64
+#define COL_GAP 2
+
 typedef enum {
     MENU_QUIT,
     MENU_ADD,
@@ -13,6 +23,22 @@ typedef enum {
     MENU_RANDOM,
     MENU_LAST = MENU_RANDOM
 } MenuChoice;
+
+typedef enum {
+    REG_OK,
+    REG_FULL,
+    REG_OGILTIGT_POSITION,
+    REG_TOM_POSITION,
+    REG_DUPLICATE_PLATE
+} Regstats;
+
+typedef enum {
+    INPUT_OK,
+    INPUT_OGILTIGT,
+    INPUT_END_OF_FILE
+} InputStatus;
+
+static const char *const RANDOM_TYPES[] = {"SUV", "Sedan", "Kupe", "Van", "Minivan", "Pickup", "Convertible", "Crossover"};
 
 /* 
 Skapa en set av instruktioner:
@@ -87,8 +113,12 @@ int main(void) {
     int choice;
     int running = 1;
 
-    switch (choice) {
-        case MENU_ADD: add_vechile(); break;
-        case MENU_QUIT: running = 0; break; 
+    while (running) {
+        print_menu();
+        if (//input invalid sluta programmet) break;
+        switch (choice) {
+            case MENU_ADD: add_vechile(); break;
+            case MENU_QUIT: running = 0; break; 
+        }
     }
 }
