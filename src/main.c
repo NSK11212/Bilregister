@@ -35,7 +35,7 @@ typedef enum {
     REG_OGILTIGT_POSITION,
     REG_TOM_POSITION,
     REG_DUPLICATE_PLATE
-} Regstats;
+} RegStatus;
 
 typedef enum {
     INPUT_OK,
@@ -93,6 +93,10 @@ static InputStatus read_int(const char *prompt, int *out) {
 
 // File logic
 
+static RegStatus registry_add(Registry *reg, ) {
+
+}
+
 /* MAIN PROGRAM */
 static void print_menu(void) {
     printf("\n1. Add Vehicle\n");
@@ -104,21 +108,16 @@ static void print_menu(void) {
     printf("0. Quit\n");
 }
 
-static void add_vehicle() {
-/* Lägg till bill
-fråga efter namn, 
-            ålder, 
-            bilmärke, 
-            fordontyp, 
-            regnummer.
-*/    
+static void add_vehicle(Registry *reg, int random) {
+    Vehicle b;
+    RegStatus status;   
 }
 
-static void remove_vehicle() {
+static void remove_vehicle(Registry *reg, int random) {
 // Från 1-10 position "Tänk på att vektorer börjar på 0"
 }
 
-static void random_vehicle (const Registry *reg) {
+static void random_vehicle (Registry *reg, int random) {
 // Slumpgenration För Funktioner 6 i labb listan
 }
 
@@ -126,7 +125,7 @@ static void show_vehicle () {
 
 }
 
-static void show_registry_vehicle () {
+static void show_all () {
 // Skriver ut hela listan "Endast ett fordon per rad"
 }
 
@@ -143,12 +142,33 @@ int main(void) {
     int choice, running = 1;
     FileStatus loaded;
 
+    srand((unsigned int)time(NULL));
+    loaded = file_load(&reg, REGISTRY_FILE);
+    if (loaded == FILE_LOAD_MISSING) {
+        printf("No refistry file found. Starting with an empty registry.dat \n");
+    }
+    else if ( loaded == FILE_LOAD_CORRUPT) {
+        printf("Registy file curropted. Starting with an empty registry");
+    }
+
     while (running) {
         InputStatus status;
         print_menu();
-        if ()//input invalid sluta programmet) break;
+        if ((status = read_int("> ", &choice)) == INPUT_END_OF_FILE) {
+            break;
+        } //input invalid sluta programmet) break;
+        if (status == INPUT_OGILTIGT || choice < MENU_QUIT || choice > MENU_RANDOM) {
+            printf("ERROR: Choose a number from %d to %d. \n", MENU_QUIT, MENU_RANDOM);
+            continue;
+        }
+
         switch (choice) {
-            case MENU_ADD: add_vechile(); break;
+            case MENU_ADD: add_vechile(&reg, 0); break;
+            case MENU_REMOVE: remove_vehicle(&reg, 1); break;
+            case MENU_SORT: sort_vehicle(&reg); printf("Registry data sorted by brand name. \n"); break;
+            case MENU_SHOW: show_vehicle(&reg); break;
+            case MENU_SHOW_ALL: show_all(&reg); break;
+            case MENU_RANDOM: random_vehicle(&reg, 0); break; 
             case MENU_QUIT: running = 0; break; 
         }
     }

@@ -2,13 +2,14 @@
 #include <string.h>
 #include "file.h"
 
-static void terminate_strings(register *reg) {
-    int i;
-    for (i = 0; i < MAX_VEHICLES; i++) {
+static void terminate_strings(Registry *reg) {
+    for (int i = 0; i < MAX_VEHICLES; i++) {
         reg->vehicles[i].type[TEXT_LEN - 1] = '\0';
-    }
+        reg->vehicles[i].brand[TEXT_LEN - 1] = '\0';
+        reg->vehicles[i].plate[TEXT_LEN  - 1] = '\0';
+        reg->vehicles[i].owner.name[TEXT_LEN - 1]  = '\0';
+    } 
 }
-
 
 FileStatus file_load(Registry *reg, const char *path) {
     FILE *f = fopen(path, "rb");
@@ -39,7 +40,7 @@ FileStatus file_save(const Registry*reg, const char *path) {
 
     written = fwrite(reg, sizeof *reg, 1, f);
     
-    if (fclose(f) != o || written != 1) {
+    if (fclose(f) != 0 || written != 1) {
         return FILE_SAVE_FAILED;
     }
 
