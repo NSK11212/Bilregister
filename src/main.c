@@ -75,7 +75,23 @@ static int read_text(const char *prompt, char *buf, size_t size) {
     }
 }
 
-// Behöver samma funktion som  read_line men för int så read_int
+static InputStatus read_int(const char *prompt, int *out) {
+    char buf[LINE_LEN], *end;
+    long value;
+    InputStatus status;
+
+    printf("%s", prompt);
+    if ((status = read_line(buf, sizeof buf)) != INPUT_OK) return status;
+    errno = 0;
+    value =  strtol(buf, &end, DIGIT_BASE);
+    if (end == buf || errno == ERANGE || value > INT_MAX || value < INT_MIN) return INPUT_OGILTIGT;
+    while (isspace((unsigned char)*end)) end++;
+    if (*end != '\0') return INPUT_OGILTIGT;
+    *out = (int)value;
+    return INPUT_OK;
+}
+
+// File logic
 
 /* MAIN PROGRAM */
 static void print_menu(void) {
@@ -102,7 +118,7 @@ static void remove_vehicle() {
 // Från 1-10 position "Tänk på att vektorer börjar på 0"
 }
 
-static void random_vehicle () {
+static void random_vehicle (const Registry *reg) {
 // Slumpgenration För Funktioner 6 i labb listan
 }
 
@@ -123,13 +139,14 @@ static void print_vehicle () {
 }
 
 int main(void) {
-    int choice;
-    int running = 1;
+    Registry reg; 
+    int choice, running = 1;
+    FileStatus loaded;
 
     while (running) {
         InputStatus status;
         print_menu();
-        if (//input invalid sluta programmet) break;
+        if ()//input invalid sluta programmet) break;
         switch (choice) {
             case MENU_ADD: add_vechile(); break;
             case MENU_QUIT: running = 0; break; 
