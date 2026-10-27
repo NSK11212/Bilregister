@@ -20,17 +20,16 @@ typedef struct {
 typedef struct {
     Vehicle vehicles[MAX_VEHICLES];
     int count; 
-} Registry;
+} Registryfil;
 
 typedef enum {
-    FILE_LOAD_OK,
-    FILE_LOAD_MISSING,
-    FILE_LOAD_CORRUPT,
-    FILE_SAVE_OK,
-    FILE_SAVE_FAILED
-} FileStatus;
+    file_load_OK,
+    file_load_FAILED,
+    file_SAVE,
+    file_save_FAILED
+} filestatus;
 
-FileStatus file_load(Registry *reg, const char *path);
-FileStatus file_save(const Registry *reg, const char *path);
+filestatus file_load(Registryfil *reg, const char *path);
+filestatus file_save(const Registryfil *reg, const char *path);
 
 #endif
